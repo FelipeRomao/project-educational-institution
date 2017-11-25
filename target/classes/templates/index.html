@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Spring Boot - Application</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+<script src="/webjars/jquery/3.1.1-1/jquery.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: header"></div>
+	<div class="container">
+		<div class="jumbotron">
+			<h2 th:text="'Mensagem do servidor: ' + ${mensagem}"></h2>
+		</div>
+		<br /> <br />
+		<div class="row">
+			<div class="form-group col-md-6">
+				<input type="text" class="form-control"
+					placeholder="Digite seu nome" />
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragmentos/fragmentos :: footer"></div>
+</body>
+</html>

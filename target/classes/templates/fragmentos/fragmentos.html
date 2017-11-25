@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+<title>Insert title here</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+	<!-- *Header* -->
+	<nav class="navbar navbar-default navbar-static-top" th:fragment="header">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<a class="navbar-brand" href="#">Spring Boot</a>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/">Ínicio</a></li>
+					<li><a href="/instituicoes/index">Instituições</a></li>
+					<li><a href="/alunos/index">Alunos</a></li>
+				</ul>
+			</div>	
+		</div>
+	</nav>
+	<!-- *Footer* -->
+	<div th:fragment="footer" style="text-align: center;">
+		<i>Felipe Romao &copy; 2017</i>
+	</div>
+</body>
+</html>

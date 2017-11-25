@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Spring Boot - Lista de Instituições</title>
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: header"></div>
+	<div class="container">
+		<div class="jumbotron">
+			<h2>Lista de instituições cadastradas =D</h2>
+		</div>
+		<br /> <a href="/instituicoes/inserir" class="btn btn-default">Criar
+			nova instituição</a> <br /> <br />
+		<div class="row">
+			<div class="form-group col-md-6">
+				<label class="label-control" for="txt-pesquisa">Instituição
+					a ser pesquisada:</label> <input type="text" id="txt-pesquisa"
+					class="form-control" /> <br />
+				<button type="button" class="btn btn-primary" id="btn-pesquisa">Pesquisar</button>
+			</div>
+		</div>
+		<table class="table" id="tbl-instituicoes">
+			<thead>
+				<th>Nome da Instituição</th>
+				<th>Endereço</th>
+				<th>Ações</th>
+			</thead>
+			<tbody>
+				<tr th:each="instituicao: ${instituicoes}">
+					<td th:text="${instituicao.nome}"></td>
+					<td th:text="${instituicao.endereco}"></td>
+					<td><a
+						th:href="@{/instituicoes/editar/{id}(id=${instituicao.id})}"
+						class="btn btn-success">Editar</a> <a
+						th:href="@{/instituicoes/excluir/{id}(id=${instituicao.id})}"
+						class="btn btn-danger">Excluir</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:replace="fragmentos/fragmentos :: footer"></div>
+	<script type="text/javascript"
+		src="/webjars/jquery/3.1.1-1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('#btn-pesquisa')
+									.click(
+											function() {
+												$
+														.ajax({
+															method : 'GET',
+															url : '/instituicoes/pesquisarPorNome/'
+																	+ $(
+																			'#txt-pesquisa')
+																			.val(),
+															success : function(
+																	data) {
+																$(
+																		'#tbl-instituicoes tbody > tr')
+																		.remove();
+																$
+																		.each(
+																				data,
+																				function() {
+																					$(
+																							'#tbl-instituicoes tbody')
+																							.append(
+																									'<tr>'
+																											+ '	<td>'
+																											+ this.nome
+																											+ '</td>'
+																											+ '	<td>'
+																											+ this.endereco
+																											+ '</td>'
+																											+ '	<td>'
+																											+ '		<a href="/instituicoes/editar/'+ this.id + '" class="btn btn-success">Editar</a> '
+																											+ '		<a href="/instituicoes/excluir/'+ this.id + '" class="btn btn-danger">Excluir</a> '
+																											+ '	</td>'
+																											+ '</tr>');
+																				});
+															},
+															error : function() {
+																alert('Não foi possível executar a pesquisa! =(');
+															}
+														});
+											});
+						});
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+	<meta charset="UTF-8"></meta>
+	<title>Spring Boot - Alteração de Aluno</title>
+	<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: header"></div>
+		<div class="container">
+			<h2>Edição de aluno =D</h2>
+			<form class="form-horizontal" action="/alunos/inserir" method="post" th:object="${aluno}">
+				<input type="hidden" th:field="*{id}"/>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label class="label-control" for="txt-nome">Nome do aluno:</label>
+						<input type="text" class="form-control" id="txt-nome" th:field="*{nome}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label class="label-control" for="txt-idade">Idade:</label>
+						<input type="number" class="form-control" id="txt-idade" th:field="*{idade}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label class="label-control" for="slt-instituicao">Instituição:</label>
+						<select class="form-control" th:field="*{instituicao.id}">
+							<option th:each="instituicao: ${instituicoes}" th:value="${instituicao.id}" th:text="${instituicao.nome}"></option>
+						</select>
+					</div>
+				</div>
+				<input type="submit" value="Salvar" class="btn btn-primary"/>
+			</form>
+		</div>
+	<div th:replace="fragmentos/fragmentos :: footer"></div>
+	<script type="text/javascript" src="/webjars/jquery/3.1.1-1/jquery.min.js"></script>
+</body>
+</html>
